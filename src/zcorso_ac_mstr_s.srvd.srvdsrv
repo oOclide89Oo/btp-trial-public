@@ -1,0 +1,5 @@
+define service ZCORSO_AC_MSTR_S {
+  expose ZC_CORSO_AC_MSTR_S as AC_MSTR_S;
+  expose ZC_CORSO_AC_MSTR as AC_MSTR;
+  expose ZC_CORSO_AC_DTL as AC_DTL;
+}

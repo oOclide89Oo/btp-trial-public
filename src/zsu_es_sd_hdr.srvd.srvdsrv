@@ -1,0 +1,4 @@
+@EndUserText.label: 'service definition esercizio silvio'
+define service ZSU_ES_SD_HDR {
+  expose ZSU_PRJ_ES_CDS_HDR as Endpoint;
+}

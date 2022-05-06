@@ -1,0 +1,4 @@
+@EndUserText.label: 'service definiton web api'
+define service ZSU_SD_UNM_LOG {
+  expose ZSU_CDS_UNM_LOG;
+}

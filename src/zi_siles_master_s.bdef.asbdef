@@ -1,0 +1,101 @@
+managed;
+with draft;
+
+define behavior for ZI_SILES_MASTER_S alias ES_MASTER_S
+implementation in class ZBP_I_SILES_MASTER_S unique
+draft table ZSILES_MASTER01D
+with unmanaged save
+lock master total etag LastChangedAtMax
+
+{
+  update;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) selectTransport parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _ES_MASTER { create; with draft; }
+}
+
+define behavior for ZI_SILES_MASTER alias ES_MASTER
+implementation in class ZBP_I_SILES_MASTER unique
+persistent table ZSU_ES_MASTER
+draft table ZSILES_MASTER00D
+with additional save
+etag master LocalLastChangedAt
+lock dependent by _ES_MASTER_S
+
+{
+  field ( readonly )
+   SingletonID;
+
+  field ( readonly : update )
+   Fieldname,
+   Activesystem;
+
+
+  update;
+  delete;
+
+  mapping for ZSU_ES_MASTER
+  {
+    Fieldname = FIELDNAME;
+    Activesystem = ACTIVESYSTEM;
+    Fieldvalue = FIELDVALUE;
+    CreatedBy = CREATED_BY;
+    CreatedAt = CREATED_AT;
+    LastChangedBy = LAST_CHANGED_BY;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    Inactive = INACTIVE;
+  }
+
+  association _ES_MASTER_S { with draft; }
+  association _ES_DETAIL { create; with draft; }
+
+  validation val_transport on save { create; update; }
+}
+
+define behavior for ZI_SILES_DETAIL alias ES_DETAIL
+implementation in class ZBP_I_SILES_DETAIL unique
+persistent table ZSU_ES_DETAIL
+draft table ZSILES_DETAIL00D
+with additional save
+etag master LocalLastChangedAt
+lock dependent by _ES_MASTER_S
+
+{
+  field ( readonly )
+   SingletonID;
+
+  field ( readonly : update )
+   ConfigurationID,
+   Fieldname,
+   Activesystem;
+
+
+  update;
+  delete;
+
+  mapping for ZSU_ES_DETAIL
+  {
+    ConfigurationID = CONFIGURATIONID;
+    Fieldname = FIELDNAME;
+    Activesystem = ACTIVESYSTEM;
+    Customizingvalue = CUSTOMIZINGVALUE;
+    CreatedBy = CREATED_BY;
+    CreatedAt = CREATED_AT;
+    LastChangedBy = LAST_CHANGED_BY;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    Inactive = INACTIVE;
+  }
+
+  association _ES_MASTER { with draft; }
+  association _ES_MASTER_S { with draft; }
+
+  validation val_transport on save { create; update; }
+}

@@ -1,0 +1,4 @@
+@EndUserText.label: 'Log WEB API Service Definition'
+define service ZCS_SD_UNM_LOG_V2 {
+  expose ZCS_CDS_UNM_LOG_V2;
+}

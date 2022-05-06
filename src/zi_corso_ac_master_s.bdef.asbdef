@@ -1,0 +1,101 @@
+managed;
+with draft;
+
+define behavior for ZI_CORSO_AC_MASTER_S alias AC_MASTER_S
+implementation in class ZBP_I_CORSO_AC_MASTER_S unique
+draft table ZCORSO_AC_MAS01D
+with unmanaged save
+lock master total etag LastChangedAtMax
+
+{
+  update;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) selectTransport parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _AC_MASTER { create; with draft; }
+}
+
+define behavior for ZI_CORSO_AC_MASTER alias AC_MASTER
+implementation in class ZBP_I_CORSO_AC_MASTER unique
+persistent table ZRAP_AC_MASTER
+draft table ZCORSO_AC_MAS00D
+with additional save
+etag master LocalLastChangedAt
+lock dependent by _AC_MASTER_S
+
+{
+  field ( readonly )
+   SingletonID;
+
+  field ( readonly : update )
+   Fieldname,
+   Activesystem;
+
+
+  update;
+  delete;
+
+  mapping for ZRAP_AC_MASTER
+  {
+    Fieldname = FIELDNAME;
+    Activesystem = ACTIVESYSTEM;
+    Fieldvalue = FIELDVALUE;
+    CreatedBy = CREATED_BY;
+    CreatedAt = CREATED_AT;
+    LastChangedBy = LAST_CHANGED_BY;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    Inactive = INACTIVE;
+  }
+
+  association _AC_MASTER_S { with draft; }
+  association _AC_DETAIL { create; with draft; }
+
+  validation val_transport on save { create; update; }
+}
+
+define behavior for ZI_CORSO_AC_DETAIL alias AC_DETAIL
+implementation in class ZBP_I_CORSO_AC_DETAIL unique
+persistent table ZRAP_AC_DETAIL
+draft table ZCORSO_AC_DET00D
+with additional save
+etag master LocalLastChangedAt
+lock dependent by _AC_MASTER_S
+
+{
+  field ( readonly )
+   SingletonID;
+
+  field ( readonly : update )
+   ConfigurationID,
+   Fieldname,
+   Activesystem;
+
+
+  update;
+  delete;
+
+  mapping for ZRAP_AC_DETAIL
+  {
+    ConfigurationID = CONFIGURATIONID;
+    Fieldname = FIELDNAME;
+    Activesystem = ACTIVESYSTEM;
+    Customizingvalue = CUSTOMIZINGVALUE;
+    CreatedBy = CREATED_BY;
+    CreatedAt = CREATED_AT;
+    LastChangedBy = LAST_CHANGED_BY;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    Inactive = INACTIVE;
+  }
+
+  association _AC_MASTER { with draft; }
+  association _AC_MASTER_S { with draft; }
+
+  validation val_transport on save { create; update; }
+}

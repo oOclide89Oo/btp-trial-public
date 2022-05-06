@@ -1,0 +1,101 @@
+managed;
+with draft;
+
+define behavior for ZI_CORSO_SU_MASTER_S alias SU_MASTER_S
+implementation in class ZBP_I_CORSO_SU_MASTER_S unique
+draft table ZCORSO_SU_MAS01D
+with unmanaged save
+lock master total etag LastChangedAtMax
+
+{
+  update;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) selectTransport parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _SU_MASTER { create; with draft; }
+}
+
+define behavior for ZI_CORSO_SU_MASTER alias SU_MASTER
+implementation in class ZBP_I_CORSO_SU_MASTER unique
+persistent table ZRAP_SU_DB
+draft table ZCORSO_SU_MAS00D
+with additional save
+etag master LocalLastChangedAt
+lock dependent by _SU_MASTER_S
+
+{
+  field ( readonly )
+   SingletonID;
+
+  field ( readonly : update )
+   Fieldname,
+   Activesystem;
+
+
+  update;
+  delete;
+
+  mapping for ZRAP_SU_DB
+  {
+    Fieldname = FIELDNAME;
+    Activesystem = ACTIVESYSTEM;
+    Fieldvalue = FIELDVALUE;
+    CreatedBy = CREATED_BY;
+    CreatedAt = CREATED_AT;
+    LastChangedBy = LAST_CHANGED_BY;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    Inactive = INACTIVE;
+  }
+
+  association _SU_MASTER_S { with draft; }
+  association _SU_DETAIL { create; with draft; }
+
+  validation val_transport on save { create; update; }
+}
+
+define behavior for ZI_CORSO_SU_DETAIL alias SU_DETAIL
+implementation in class ZBP_I_CORSO_SU_DETAIL unique
+persistent table ZRAP_SU_DETAIL
+draft table ZCORSO_SU_DET00D
+with additional save
+etag master LocalLastChangedAt
+lock dependent by _SU_MASTER_S
+
+{
+  field ( readonly )
+   SingletonID;
+
+  field ( readonly : update )
+   ConfigurationID,
+   Fieldname,
+   Activesystem;
+
+
+  update;
+  delete;
+
+  mapping for ZRAP_SU_DETAIL
+  {
+    ConfigurationID = CONFIGURATIONID;
+    Fieldname = FIELDNAME;
+    Activesystem = ACTIVESYSTEM;
+    Customizingvalue = CUSTOMIZINGVALUE;
+    CreatedBy = CREATED_BY;
+    CreatedAt = CREATED_AT;
+    LastChangedBy = LAST_CHANGED_BY;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    Inactive = INACTIVE;
+  }
+
+  association _SU_MASTER { with draft; }
+  association _SU_MASTER_S { with draft; }
+
+  validation val_transport on save { create; update; }
+}

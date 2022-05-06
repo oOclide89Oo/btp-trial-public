@@ -1,0 +1,64 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'ES_MASTER'
+  }
+}
+annotate view ZC_SILES_MASTER_S with
+{
+  @UI.facet: [ {
+    id: 'idIdentification', 
+    parentId: 'idCollection', 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'General Information', 
+    position: 10 , 
+    hidden: true
+  }, 
+  {
+    purpose: #STANDARD, 
+    type: #LINEITEM_REFERENCE, 
+    label: 'ES_MASTER', 
+    position: 20 , 
+    targetElement: '_ES_MASTER'
+  } ]
+  @UI.lineItem: [ {
+    position: 10 , 
+    importance: #HIGH, 
+    label: 'SingletonID'
+  } ]
+  @UI.identification: [ {
+    position: 10 , 
+    label: 'SingletonID'
+  } ]
+  @UI.selectionField: [ {
+    position: 10 
+  } ]
+  SingletonID;
+  
+  @UI.lineItem: [ {
+    position: 20 , 
+    importance: #HIGH, 
+    label: 'LastChangedAtMax'
+  } ]
+  @UI.identification: [ {
+    position: 20 , 
+    label: 'LastChangedAtMax'
+  } ]
+  LastChangedAtMax;
+  
+  @UI.lineItem: [ {
+    position: 30 , 
+    importance: #HIGH, 
+    label: 'Request'
+  } ]
+  @UI.identification: [ {
+    position: 30 , 
+    type: #FOR_ACTION, 
+    dataAction: 'selectTransport', 
+    label: 'Select Transport'
+  } ]
+  Request;
+  
+  @UI.hidden: true
+  HideTransport;
+}

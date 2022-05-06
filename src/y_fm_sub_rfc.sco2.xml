@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SCO2" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <SCO2>
+    <IBS_ID>Y_FM_SUB_RFC</IBS_ID>
+    <IBS_TYPE>SRFC</IBS_TYPE>
+    <RFC_SERVICE_ID>Y_FM_SUB</RFC_SERVICE_ID>
+    <REL_FOR_CUST_CSCN>X</REL_FOR_CUST_CSCN>
+    <ABAP_LANGUAGE_VERSION>5</ABAP_LANGUAGE_VERSION>
+    <NAME>Y_FM_SUB_RFC</NAME>
+    <DESCRIPTION> RFC Service Y_FM_SUB</DESCRIPTION>
+   </SCO2>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,90 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'AC_DTL', 
+    typeNamePlural: 'AC_DTLs', 
+    title: {
+      type: #STANDARD, 
+      label: 'AC_DTL', 
+      value: 'ConfigurationID'
+    }
+  }, 
+  presentationVariant: [ {
+    sortOrder: [ {
+      by: 'ConfigurationID', 
+      direction: #DESC
+    } ], 
+    visualizations: [ {
+      type: #AS_LINEITEM
+    } ]
+  } ]
+}
+annotate view ZC_CORSO_AC_DTL with
+{
+  @UI.facet: [ {
+    id: 'idAC_DTL', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'AC_DTL', 
+    position: 10 
+  } ]
+  @UI.lineItem: [ {
+    position: 10 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 10 
+  } ]
+  ConfigurationID;
+  
+  @UI.lineItem: [ {
+    position: 20 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 20 
+  } ]
+  Fieldname;
+  
+  @UI.lineItem: [ {
+    position: 30 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 30 
+  } ]
+  Activesystem;
+  
+  @UI.lineItem: [ {
+    position: 40 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 40 
+  } ]
+  Customizingvalue;
+  
+  @UI.hidden: true
+  CreatedBy;
+  
+  @UI.hidden: true
+  CreatedAt;
+  
+  @UI.hidden: true
+  LastChangedBy;
+  
+  @UI.hidden: true
+  LastChangedAt;
+  
+  @UI.hidden: true
+  LocalLastChangedAt;
+  
+  @UI.lineItem: [ {
+    position: 100 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 100 
+  } ]
+  Inactive;
+}

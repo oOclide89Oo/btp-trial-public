@@ -1,0 +1,101 @@
+managed;
+with draft;
+
+define behavior for ZI_CORSO_AC_MSTR_S alias AC_MSTR_S
+implementation in class ZBP_I_CORSO_AC_MSTR_S unique
+draft table ZCORSO_AC_MST01D
+with unmanaged save
+lock master total etag LastChangedAtMax
+
+{
+  update;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) selectTransport parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _AC_MSTR { create; with draft; }
+}
+
+define behavior for ZI_CORSO_AC_MSTR alias AC_MSTR
+implementation in class ZBP_I_CORSO_AC_MSTR unique
+persistent table ZAC_RAP_MASTER
+draft table ZCORSO_AC_MST00D
+with additional save
+etag master LocalLastChangedAt
+lock dependent by _AC_MSTR_S
+
+{
+  field ( readonly )
+   SingletonID;
+
+  field ( readonly : update )
+   Fieldname,
+   Activesystem;
+
+
+  update;
+  delete;
+
+  mapping for ZAC_RAP_MASTER
+  {
+    Fieldname = FIELDNAME;
+    Activesystem = ACTIVESYSTEM;
+    Fieldvalue = FIELDVALUE;
+    CreatedBy = CREATED_BY;
+    CreatedAt = CREATED_AT;
+    LastChangedBy = LAST_CHANGED_BY;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    Inactive = INACTIVE;
+  }
+
+  association _AC_MSTR_S { with draft; }
+  association _AC_DTL { create; with draft; }
+
+  validation val_transport on save { create; update; }
+}
+
+define behavior for ZI_CORSO_AC_DTL alias AC_DTL
+implementation in class ZBP_I_CORSO_AC_DTL unique
+persistent table ZAC_RAP_DETAIL
+draft table ZCORSO_AC_DTL00D
+with additional save
+etag master LocalLastChangedAt
+lock dependent by _AC_MSTR_S
+
+{
+  field ( readonly )
+   SingletonID;
+
+  field ( readonly : update )
+   ConfigurationID,
+   Fieldname,
+   Activesystem;
+
+
+  update;
+  delete;
+
+  mapping for ZAC_RAP_DETAIL
+  {
+    ConfigurationID = CONFIGURATIONID;
+    Fieldname = FIELDNAME;
+    Activesystem = ACTIVESYSTEM;
+    Customizingvalue = CUSTOMIZINGVALUE;
+    CreatedBy = CREATED_BY;
+    CreatedAt = CREATED_AT;
+    LastChangedBy = LAST_CHANGED_BY;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    Inactive = INACTIVE;
+  }
+
+  association _AC_MSTR { with draft; }
+  association _AC_MSTR_S { with draft; }
+
+  validation val_transport on save { create; update; }
+}

@@ -1,0 +1,4 @@
+@EndUserText.label: 'Log Group Service Definition'
+define service ZAC_SRV_LOG_HDR {
+  expose ZAC_PRJ_LOG_HDR;
+}

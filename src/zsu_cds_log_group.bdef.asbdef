@@ -1,0 +1,32 @@
+managed implementation in class zbp_su_cds_log_group unique;
+strict;
+
+define behavior for ZSU_CDS_LOG_GROUP //alias <alias_name>
+persistent table ZSU_LOG_ITEM
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+    //  create;
+  //  update;
+  // administrative fields: read only
+  field ( readonly ) LastChangedAt, LastChangedBy, CreatedAt, CreatedBy;
+  field ( mandatory ) Logid, Activesystem;
+  mapping for ZSU_LOG_ITEM corresponding;
+
+  delete;
+  association _LogItem { internal create; }
+}
+
+define behavior for ZSU_CDS_LOG_ITM //alias <alias_name>
+persistent table ZSU_LOG_ITEM
+lock dependent by _LogHeader
+authorization dependent by _LogHeader
+//etag master <field_name>
+{
+  mapping for zsu_log_item corresponding;
+  delete;
+  field ( readonly ) Logid, Activesystem;
+  field ( numbering : managed, readonly ) Loguuid;
+  association _LogHeader;
+}

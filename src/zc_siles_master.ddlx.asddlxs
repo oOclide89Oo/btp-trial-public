@@ -1,0 +1,88 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'ES_MASTER', 
+    typeNamePlural: 'ES_MASTERs', 
+    title: {
+      type: #STANDARD, 
+      label: 'ES_MASTER', 
+      value: 'Fieldname'
+    }
+  }, 
+  presentationVariant: [ {
+    sortOrder: [ {
+      by: 'Fieldname', 
+      direction: #DESC
+    } ], 
+    visualizations: [ {
+      type: #AS_LINEITEM
+    } ]
+  } ]
+}
+annotate view ZC_SILES_MASTER with
+{
+  @UI.facet: [ {
+    id: 'idES_MASTER', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'ES_MASTER', 
+    position: 10 
+  }, 
+  {
+    id: 'idLineitem', 
+    type: #LINEITEM_REFERENCE, 
+    label: 'ES_DETAIL', 
+    position: 20 , 
+    targetElement: '_ES_DETAIL'
+  } ]
+  @UI.lineItem: [ {
+    position: 10 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 10 
+  } ]
+  Fieldname;
+  
+  @UI.lineItem: [ {
+    position: 20 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 20 
+  } ]
+  Activesystem;
+  
+  @UI.lineItem: [ {
+    position: 30 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 30 
+  } ]
+  Fieldvalue;
+  
+  @UI.hidden: true
+  CreatedBy;
+  
+  @UI.hidden: true
+  CreatedAt;
+  
+  @UI.hidden: true
+  LastChangedBy;
+  
+  @UI.hidden: true
+  LastChangedAt;
+  
+  @UI.hidden: true
+  LocalLastChangedAt;
+  
+  @UI.lineItem: [ {
+    position: 90 , 
+    importance: #HIGH
+  } ]
+  @UI.identification: [ {
+    position: 90 
+  } ]
+  Inactive;
+}

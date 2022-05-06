@@ -1,0 +1,16 @@
+projection;
+strict;
+
+define behavior for ZSU_PRJ_LOG_GROUP alias LogHeader
+{
+  use delete;
+
+  use association _LogItem;
+}
+
+define behavior for ZSU_PRJ_LOG_ITM alias LogItem
+{
+  use delete;
+
+  use association _LogHeader;
+}

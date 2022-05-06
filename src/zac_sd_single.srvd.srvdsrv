@@ -1,0 +1,4 @@
+@EndUserText.label: 'Single Table Service Definition'
+define service ZAC_SD_SINGLE {
+  expose ZAC_CDS_SINGLE;
+}

@@ -1,0 +1,4 @@
+@EndUserText.label: 'service definition log silvio'
+define service ZSD_SU {
+  expose ZSU_PRJ_LOG_GROUP;
+}

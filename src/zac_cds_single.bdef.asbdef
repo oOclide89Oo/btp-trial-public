@@ -1,0 +1,13 @@
+managed implementation in class zbp_ac_cds_single unique;
+strict;
+
+define behavior for ZAC_CDS_SINGLE //alias <alias_name>
+persistent table ZAC_DB_SINGLE
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+}

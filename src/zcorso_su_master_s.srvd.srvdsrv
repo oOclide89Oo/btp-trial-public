@@ -1,0 +1,5 @@
+define service ZCORSO_SU_MASTER_S {
+  expose ZC_CORSO_SU_MASTER_S as SU_MASTER_S;
+  expose ZC_CORSO_SU_MASTER as SU_MASTER;
+  expose ZC_CORSO_SU_DETAIL as SU_DETAIL;
+}

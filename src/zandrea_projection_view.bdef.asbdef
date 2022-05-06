@@ -1,0 +1,14 @@
+projection;
+strict;
+
+define behavior for ZANDREA_PROJECTION_VIEW //alias <alias_name>
+{
+
+// administrative fields: read only
+  field ( readonly ) LastChangedAt, LastChangedBy, CreatedAt, CreatedBy;
+
+  use create;
+  use update;
+  use delete;
+
+}

@@ -1,0 +1,36 @@
+projection;
+use draft;
+
+define behavior for ZC_SILES_MASTER_S alias ES_MASTER_S
+
+{
+  use update;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+  use action selectTransport;
+
+  use association _ES_MASTER { create; with draft; }
+}
+
+define behavior for ZC_SILES_MASTER alias ES_MASTER
+
+{
+  use update;
+  use delete;
+
+  use association _ES_MASTER_S { with draft; }
+  use association _ES_DETAIL { create; with draft; }
+}
+
+define behavior for ZC_SILES_DETAIL alias ES_DETAIL
+
+{
+  use update;
+  use delete;
+
+  use association _ES_MASTER_S { with draft; }
+}

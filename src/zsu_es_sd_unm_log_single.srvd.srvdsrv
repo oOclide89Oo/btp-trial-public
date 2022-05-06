@@ -1,0 +1,4 @@
+@EndUserText.label: 'service definition single es silvio'
+define service ZSU_ES_SD_UNM_LOG_SINGLE {
+  expose ZSU_CDS_ES_SINGLE_LOG;
+}

@@ -1,0 +1,4 @@
+@EndUserText.label: 'service'
+define service ZANDREA_SERVICE {
+  expose ZANDREA_PROJECTION_VIEW;
+}

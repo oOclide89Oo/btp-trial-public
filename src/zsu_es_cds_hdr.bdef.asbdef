@@ -1,0 +1,32 @@
+managed implementation in class zbp_su_es_cds_hdr unique;
+strict;
+
+define behavior for ZSU_ES_CDS_HDR //alias <alias_name>
+persistent table ZSU_ES_HDR
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+
+// administrative fields: read only
+  field ( readonly ) LastChangedAt, LastChangedBy, CreatedAt, CreatedBy;
+
+  // mandatory fields that are required to create an entry
+  field ( mandatory ) Fieldname, Activesystem, Fieldvalue;
+
+  create;
+  update;
+  delete;
+
+    mapping for zsu_es_hdr {
+    Fieldname     = fieldname;
+    Activesystem  = activesystem;
+    Fieldvalue    = fieldvalue;
+    CreatedBy     = created_by;
+    CreatedAt     = created_at;
+    LastChangedBy = last_changed_by;
+    LastChangedAt = last_changed_at;
+    Inactive      = inactive;
+  }
+
+}

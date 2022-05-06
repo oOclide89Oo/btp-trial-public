@@ -1,0 +1,13 @@
+projection;
+strict;
+
+define behavior for ZSU_PRJ_ES_CDS_HDR //alias <alias_name>
+{
+
+// administrative fields: read only
+  field ( readonly ) LastChangedAt, LastChangedBy, CreatedAt, CreatedBy;
+
+  use create;
+  use update;
+  use delete;
+}

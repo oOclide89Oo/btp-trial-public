@@ -1,0 +1,13 @@
+unmanaged implementation in class zbp_cs_cds_unm_log_v2 unique;
+strict; //Comment this line in to enable strict mode. The strict mode is prerequisite to be future proof regarding syntax and to be able to release your BO.
+
+define behavior for ZCS_CDS_UNM_LOG_V2 //alias <alias_name>
+//late numbering
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+//  delete;
+}

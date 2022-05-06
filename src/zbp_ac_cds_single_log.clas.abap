@@ -1,0 +1,5 @@
+CLASS zbp_ac_cds_single_log DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zac_cds_single_log.
+ENDCLASS.
+
+CLASS zbp_ac_cds_single_log IMPLEMENTATION.
+ENDCLASS.

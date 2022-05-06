@@ -1,0 +1,32 @@
+managed implementation in class zbp_ac_cds_log_hdr unique;
+strict;
+
+define behavior for ZAC_CDS_LOG_HDR //alias <alias_name>
+persistent table ZAC_DB_LOG_HDR
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  //  create;
+  //  update;
+  // administrative fields: read only
+  field ( readonly ) LastChangedAt, LastChangedBy, CreatedAt, CreatedBy;
+  field ( mandatory ) Logid, Activesystem;
+  mapping for zac_db_log_hdr corresponding;
+
+  delete;
+  association _LogItem { internal create; }
+}
+
+define behavior for ZAC_CDS_LOG_ITM //alias <alias_name>
+persistent table ZAC_DB_LOG_ITM
+lock dependent by _LogHeader
+authorization dependent by _LogHeader
+//etag master <field_name>
+{
+  mapping for zac_db_log_itm corresponding;
+  delete;
+  field ( readonly ) Logid, Activesystem;
+  field ( numbering : managed, readonly ) Loguuid;
+  association _LogHeader;
+}

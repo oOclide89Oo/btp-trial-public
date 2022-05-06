@@ -1,0 +1,5 @@
+CLASS zbp_cs_cds_unm_log DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zcs_cds_unm_log.
+ENDCLASS.
+
+CLASS zbp_cs_cds_unm_log IMPLEMENTATION.
+ENDCLASS.

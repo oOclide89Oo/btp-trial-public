@@ -1,0 +1,5 @@
+define service ZSILES_MASTER_S {
+  expose ZC_SILES_MASTER_S as ES_MASTER_S;
+  expose ZC_SILES_MASTER as ES_MASTER;
+  expose ZC_SILES_DETAIL as ES_DETAIL;
+}

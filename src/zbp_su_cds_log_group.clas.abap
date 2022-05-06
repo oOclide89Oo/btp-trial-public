@@ -1,0 +1,5 @@
+CLASS zbp_su_cds_log_group DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zsu_cds_log_group.
+ENDCLASS.
+
+CLASS zbp_su_cds_log_group IMPLEMENTATION.
+ENDCLASS.

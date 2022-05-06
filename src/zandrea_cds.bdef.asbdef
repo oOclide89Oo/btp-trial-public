@@ -1,0 +1,32 @@
+managed implementation in class zbp_andrea_cds unique;
+strict;
+
+define behavior for ZANDREA_CDS //alias <alias_name>
+persistent table ZDB_AC
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+
+// administrative fields: read only
+  field ( readonly ) LastChangedAt, LastChangedBy, CreatedAt, CreatedBy;
+
+// mandatory fields that are required to create an entry
+  field ( mandatory ) Fieldname, Activesystem, Fieldvalue;
+
+  create;
+  update;
+  delete;
+
+    mapping for zdb_ac {
+    Fieldname     = fieldname;
+    Activesystem  = activesystem;
+    Fieldvalue    = fieldvalue;
+    CreatedBy     = created_by;
+    CreatedAt     = created_at;
+    LastChangedBy = last_changed_by;
+    LastChangedAt = last_changed_at;
+    Inactive      = inactive;
+  }
+
+}

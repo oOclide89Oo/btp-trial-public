@@ -1,0 +1,4 @@
+@EndUserText.label: 'prova service definition'
+define service ZSILVIO_SERVICEDEF {
+  expose ZSILVIO_VIEW;
+}

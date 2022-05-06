@@ -1,0 +1,4 @@
+@EndUserText.label: 'log webApi sd es silvio'
+define service ZSU_ES_SD_UNM_LOG {
+  expose ZSU_CDS_ES_UNM_LOG;
+}

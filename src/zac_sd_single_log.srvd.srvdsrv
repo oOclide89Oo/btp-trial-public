@@ -1,0 +1,4 @@
+@EndUserText.label: 'Log Single Service Definition'
+define service ZAC_SD_SINGLE_LOG {
+  expose ZAC_CDS_SINGLE_LOG;
+}
